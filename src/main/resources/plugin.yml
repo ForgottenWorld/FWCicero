@@ -1,0 +1,10 @@
+name: FWCicero
+version: @version@
+main: it.forgottenworld.fwcicero.FWCicero
+api-version: 1.13
+prefix: FWCicero
+load: STARTUP
+depend: [Towny]
+authors: [Markus__27]
+description: Plugin per la gestione del Cicero
+website: https://forgottenworld.it
