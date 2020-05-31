@@ -4,7 +4,16 @@ main: it.forgottenworld.fwcicero.FWCicero
 api-version: 1.13
 prefix: FWCicero
 load: STARTUP
+database: false
 depend: [Towny]
 authors: [Markus__27]
 description: Plugin per la gestione del Cicero
 website: https://forgottenworld.it
+commands:
+  cicero:
+    description: Comando base
+    usage: "/cicero help"
+permissions:
+  forgotten.cicero.mod:
+    description: Permesso per la modifica delle città presenti nel Cicero
+    default: op
