@@ -196,11 +196,7 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
                             e.printStackTrace();
                         }
                         sender.sendMessage(ChatFormatter.formatSuccessMessage("La citta' " + args[1] + " e' stata aggiunta al cicero!"));
-                        try {
-                            sender.sendMessage(t.getSpawn().toString());
-                        } catch (TownyException e) {
-                            e.printStackTrace();
-                        }
+
                         return true;
 
                     case "remove":   // Comando /cicero remove <Town>
@@ -287,7 +283,6 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
                             listaCitta.add(args[1]);
                             locationC.put(args[1], FWLocation.getStringFromLocation(new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ())));
                             sender.sendMessage(ChatFormatter.formatSuccessMessage("La citta' " + args[1] + " e' stata aggiunta al cicero!"));
-                            sender.sendMessage(ChatFormatter.formatSuccessMessage(loc.getWorld() + " " + loc.getX() + " " + loc.getY() + " " + loc.getZ()));
                             return true;
                         }
                         return false;

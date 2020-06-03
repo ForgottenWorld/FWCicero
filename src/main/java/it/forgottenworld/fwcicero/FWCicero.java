@@ -2,6 +2,7 @@ package it.forgottenworld.fwcicero;
 
 import it.forgottenworld.fwcicero.command.CiceroCommandExecutor;
 import it.forgottenworld.fwcicero.command.tab.CiceroTabCompleter;
+import it.forgottenworld.fwcicero.listeners.DisbandTownListener;
 import it.forgottenworld.fwcicero.listeners.NewPlayerListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,6 +38,7 @@ public final class FWCicero extends JavaPlugin {
         // Registrazione event-listeners
         info("Registering listeners...");
         this.getServer().getPluginManager().registerEvents(new NewPlayerListener(), this);
+        this.getServer().getPluginManager().registerEvents(new DisbandTownListener(), this);
 
         // Caricamento delle aree da file
         info("Loading infos...");
