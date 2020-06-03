@@ -6,8 +6,10 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import it.forgottenworld.fwcicero.FWCicero;
 import it.forgottenworld.fwcicero.utility.ChatFormatter;
+import it.forgottenworld.fwcicero.utility.FWLocation;
 import it.forgottenworld.fwcicero.utility.Messages;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -31,7 +33,7 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
     //HashMap di controllo
     public static HashMap<String,String> visita = new HashMap<String,String>();
     //Citta - Location
-    public static HashMap<String,Location> locationC = new HashMap<String,Location>();
+    public static HashMap<String,String> locationC = new HashMap<String,String>();
     // Server
     Server server;
 
@@ -59,7 +61,7 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
                     int index = listaCitta.indexOf(visita.get(player.toString()));
                     if(listaCitta.size()>index+1){
                         String city = listaCitta.get(index+1);
-                        teleportAction(city , player);
+                        teleportAction(city, player);
                         player.sendMessage(ChatFormatter.formatSuccessMessage("Stai visitando " + ChatColor.GOLD + city));
                         visita.put(player.toString(), listaCitta.get(index+1));
                     }else{
@@ -189,7 +191,7 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
                         listaCitta.add(args[1]);
                         //locationC.put(args[1], new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ()));
                         try {
-                            locationC.put(args[1], t.getSpawn());
+                            locationC.put(args[1], FWLocation.getStringFromLocation(new Location(t.getSpawn().getWorld(), t.getSpawn().getX(), t.getSpawn().getY(), t.getSpawn().getZ())));
                         } catch (TownyException e) {
                             e.printStackTrace();
                         }
@@ -283,7 +285,7 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
 
                             //Aggiunge la città alla whitelist
                             listaCitta.add(args[1]);
-                            locationC.put(args[1], new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ()));
+                            locationC.put(args[1], FWLocation.getStringFromLocation(new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ())));
                             sender.sendMessage(ChatFormatter.formatSuccessMessage("La citta' " + args[1] + " e' stata aggiunta al cicero!"));
                             sender.sendMessage(ChatFormatter.formatSuccessMessage(loc.getWorld() + " " + loc.getX() + " " + loc.getY() + " " + loc.getZ()));
                             return true;
@@ -299,7 +301,7 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
     public void teleportAction(String city, Player player){
         // Teleport verso quella città
         player.sendMessage(ChatFormatter.formatSuccessMessage("Teleport verso " + ChatColor.GOLD + city + ChatColor.GREEN + " in corso"));
-        player.teleport(locationC.get(city), PlayerTeleportEvent.TeleportCause.PLUGIN);
+        player.teleport(FWLocation.getLocationFromString(locationC.get(city)), PlayerTeleportEvent.TeleportCause.PLUGIN);
         server = player.getServer();
         server.broadcastMessage(ChatFormatter.formatSuccessMessage(player.getName() + " sta visitando " + city));
     }
@@ -326,15 +328,19 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
     public static void saveHash(){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/whiteCitta.markus"));
+            FWCicero.info(listaCitta.toString());
             oos.writeObject(listaCitta);
             oos.close();
             ObjectOutputStream oos1 = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/whitePlayer.markus"));
+            FWCicero.info(whitelistP.toString());
             oos1.writeObject(whitelistP);
             oos1.close();
             ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/visitaPlayer.markus"));
+            FWCicero.info(visita.toString());
             oos2.writeObject(visita);
             oos2.close();
             ObjectOutputStream oos3 = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/locations.markus"));
+            FWCicero.info(locationC.toString());
             oos3.writeObject(locationC);
             oos3.close();
         } catch(Exception e) {
@@ -348,21 +354,25 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
             FileInputStream fileIn = new FileInputStream("plugins/FWCicero/whiteCitta.markus");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             listaCitta = (ArrayList<String>) in.readObject();
+            FWCicero.info(listaCitta.toString());
             in.close();
             fileIn.close();
             FileInputStream fileIn1 = new FileInputStream("plugins/FWCicero/whitePlayer.markus");
             ObjectInputStream in1 = new ObjectInputStream(fileIn1);
             whitelistP = (HashMap<String,Long>) in1.readObject();
+            FWCicero.info(whitelistP.toString());
             in1.close();
             fileIn1.close();
             FileInputStream fileIn2 = new FileInputStream("plugins/FWCicero/visitaPlayer.markus");
             ObjectInputStream in2 = new ObjectInputStream(fileIn2);
             visita = (HashMap<String,String>) in2.readObject();
+            FWCicero.info(visita.toString());
             in2.close();
             fileIn2.close();
             FileInputStream fileIn3 = new FileInputStream("plugins/FWCicero/locations.markus");
             ObjectInputStream in3 = new ObjectInputStream(fileIn3);
-            locationC = (HashMap<String,Location>) in3.readObject();
+            locationC = (HashMap<String,String>) in3.readObject();
+            FWCicero.info(locationC.toString());
             in3.close();
             fileIn3.close();
         } catch (Exception e) {
