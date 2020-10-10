@@ -1,8 +1,27 @@
-# FWCicero
-___
-**Description**
+<p align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-The Cicero plugin allows new users to take a free tour of the cities on the Server.
+  <h3 align="center">FWCicero</h3>
+  
+  <p align="center">
+    Cicero allows new players to take a free tour of the towns on a Server.
+    <br />
+    <a href="https://github.com/ForgottenWorld/FWCicero/wiki"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/ForgottenWorld/FWCicero/issues/new?assignees=&labels=&template=bug_report.md&title=">Report Bug</a>
+    ·
+    <a href="https://github.com/ForgottenWorld/FWCicero/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
+  </p>
+</p>
+
+
+![GitHub issues](https://img.shields.io/github/issues/ForgottenWorld/FWCicero)
+![GitHub forks](https://img.shields.io/github/forks/ForgottenWorld/FWCicero)
+![GitHub stars](https://img.shields.io/github/stars/ForgottenWorld/FWCicero)
+![GitHub](https://img.shields.io/github/license/ForgottenWorld/FWCicero)
 ___
 
 **Operation**
