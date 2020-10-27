@@ -322,19 +322,15 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
     public static void saveHash(){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/whiteCitta.markus"));
-            FWCicero.info(listaCitta.toString());
             oos.writeObject(listaCitta);
             oos.close();
             ObjectOutputStream oos1 = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/whitePlayer.markus"));
-            FWCicero.info(whitelistP.toString());
             oos1.writeObject(whitelistP);
             oos1.close();
             ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/visitaPlayer.markus"));
-            FWCicero.info(visita.toString());
             oos2.writeObject(visita);
             oos2.close();
             ObjectOutputStream oos3 = new ObjectOutputStream(new FileOutputStream("plugins/FWCicero/locations.markus"));
-            FWCicero.info(locationC.toString());
             oos3.writeObject(locationC);
             oos3.close();
         } catch(Exception e) {
@@ -348,25 +344,21 @@ public class CiceroCommandExecutor implements CommandExecutor, Serializable {
             FileInputStream fileIn = new FileInputStream("plugins/FWCicero/whiteCitta.markus");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             listaCitta = (ArrayList<String>) in.readObject();
-            FWCicero.info(listaCitta.toString());
             in.close();
             fileIn.close();
             FileInputStream fileIn1 = new FileInputStream("plugins/FWCicero/whitePlayer.markus");
             ObjectInputStream in1 = new ObjectInputStream(fileIn1);
             whitelistP = (HashMap<String,Long>) in1.readObject();
-            FWCicero.info(whitelistP.toString());
             in1.close();
             fileIn1.close();
             FileInputStream fileIn2 = new FileInputStream("plugins/FWCicero/visitaPlayer.markus");
             ObjectInputStream in2 = new ObjectInputStream(fileIn2);
             visita = (HashMap<String,String>) in2.readObject();
-            FWCicero.info(visita.toString());
             in2.close();
             fileIn2.close();
             FileInputStream fileIn3 = new FileInputStream("plugins/FWCicero/locations.markus");
             ObjectInputStream in3 = new ObjectInputStream(fileIn3);
             locationC = (HashMap<String,String>) in3.readObject();
-            FWCicero.info(locationC.toString());
             in3.close();
             fileIn3.close();
         } catch (Exception e) {

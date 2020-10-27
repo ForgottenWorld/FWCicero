@@ -21,7 +21,7 @@ public class NewPlayerListener implements Listener {
         //Acquisisco il player
         Player join = (Player)e.getPlayer();
 
-        int hours   = (int) ((FWCicero.getDefaultConfig().getInt("time") / (1000*60*60)));
+        int hours = (int) ((FWCicero.getDefaultConfig().getInt("time") / (1000*60*60)));
 
         //Controllo se non è la prima volta che entra
         if(join.hasPlayedBefore()) return;
