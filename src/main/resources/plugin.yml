@@ -3,7 +3,7 @@ version: @version@
 main: it.forgottenworld.fwcicero.FWCicero
 api-version: 1.13
 prefix: FWCicero
-load: STARTUP
+load: POSTWORLD
 database: false
 depend: [Towny]
 authors: [Markus__27]
@@ -13,6 +13,9 @@ commands:
   cicero:
     description: Comando base
     usage: "/cicero help"
+  protect:
+    description: Comando protect
+    usage: "/protect"
 permissions:
   forgotten.cicero.mod:
     description: Permesso per la modifica delle città presenti nel Cicero

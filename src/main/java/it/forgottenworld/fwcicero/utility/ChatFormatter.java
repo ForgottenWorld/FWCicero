@@ -2,8 +2,13 @@ package it.forgottenworld.fwcicero.utility;
 
 import org.bukkit.ChatColor;
 
+import java.util.Collections;
+
 public class ChatFormatter {
 
+    /**
+     * PREFIX
+     */
     public static String pluginPrefix() {
         return  ChatColor.DARK_GRAY + "[" +
                 ChatColor.DARK_GREEN + "Cicero" +
@@ -11,12 +16,31 @@ public class ChatFormatter {
                 ChatColor.RESET;
     }
 
-    public static String chatHeader() {
-        return  ChatColor.GREEN + "-------------------[ " +
-                ChatColor.DARK_GREEN + "Cicero" +
-                ChatColor.GREEN + " ]-------------------";
+    public static String pluginPrefixProtect() {
+        return  pluginPrefix() +
+                ChatColor.DARK_GRAY + "[" +
+                ChatColor.DARK_RED + "Protect" +
+                ChatColor.DARK_GRAY + "] " +
+                ChatColor.RESET;
     }
 
+    /**
+     * HEADER & FOOTER
+     */
+    public static String chatHeader() {
+        return  ChatColor.GREEN + "----------------------[ " +
+                ChatColor.DARK_GREEN + "Cicero" +
+                ChatColor.GREEN + " ]-----------------------";
+    }
+
+    public static String chatFooter() {
+        return  ChatColor.GREEN + String.join("", Collections.nCopies(53, "-"));
+    }
+
+    /**
+     * MESSAGE
+     * CICERO
+     */
     public static String formatSuccessMessage(String message) {
         message = pluginPrefix() + ChatColor.GREEN + message;
         return message;
@@ -32,20 +56,47 @@ public class ChatFormatter {
         return message;
     }
 
-    public static String helpMessage() {
-        String message = chatHeader();
-        message = message.concat(
-                "\n" + ChatColor.GRAY + "Lista comandi:" +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GRAY + ": Attiva la visita delle citta'." +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "add " + "<Town> " + ChatColor.GRAY + ": Aggiunge una Town al Cicero." +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "add " + "<Town> " + "[-f] " + ChatColor.GRAY + ": Aggiunge una Town al Cicero sulla tua posizione. " +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "allow " + "<Player> " + ChatColor.GRAY + ": Abilita un Player al Cicero." +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "help " + ChatColor.GRAY + ": Mostra questo elenco." +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "list " + ChatColor.GRAY + ": Mostra la lista delle Town nel Cicero." + "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "reload " + ChatColor.GRAY + ": Ricarica il config.yml." +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "remove " + "<Town> " + ChatColor.GRAY + ": Rimuove una Town dal Cicero." +
-                "\n" + ChatColor.GOLD + "> " + ChatColor.DARK_GREEN + "/cicero " + ChatColor.GREEN + "timeleft " + ChatColor.GRAY + ": Mostra il tempo residuo per utilizzare il Cicero."
-        );
+    /**
+     * PROTECT
+     */
+    public static String formatProtectSuccessMessage(String message) {
+        message = pluginPrefixProtect() + ChatColor.GREEN + message;
         return message;
     }
 
+    public static String formatProtectWarningMessage(String message) {
+        message = pluginPrefixProtect() + ChatColor.GOLD + message;
+        return message;
+    }
+
+    public static String formatProtectErrorMessage(String message) {
+        message = pluginPrefixProtect() + ChatColor.RED + message;
+        return message;
+    }
+
+    /**
+     * NO-PREFIX
+     */
+    public static String formatSuccessMessageNoPrefix(String message) {
+        message = ChatColor.GREEN + message;
+        return message;
+    }
+
+    public static String formatWarningMessageNoPrefix(String message) {
+        message = ChatColor.GOLD + message;
+        return message;
+    }
+
+    public static String formatErrorMessageNoPrefix(String message) {
+        message = ChatColor.RED + message;
+        return message;
+    }
+
+    public static String formatListMessage(String command, String subcommand, String args, String description) {
+        String message = ChatColor.GOLD + "> " +
+                ChatColor.DARK_GREEN + "/" + command + " " +
+                ChatColor.GREEN + subcommand + " " + args +
+                ChatColor.GRAY + ": " + description;
+        return message;
+    }
 }
